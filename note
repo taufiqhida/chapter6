@@ -1,0 +1,6 @@
+npm install express multer dotenv jsonwebtoken bcrypt prisma @prisma/client //Install
+npx prisma init --datasource-provider postgresql //Menginisatasi
+npx prisma migrate dev --name create_users_table //Migrate Users
+npx prisma migrate dev --name create_categories_table
+npx prisma migrate dev --name create_articles_table
+npx prisma migrate dev --name add_relation_article_to_categories_table
