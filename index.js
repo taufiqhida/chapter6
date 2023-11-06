@@ -1,5 +1,6 @@
 import express from 'express'
 import 'dotenv/config.js'
+import cors from 'cors'
 const app = express(),
     port = process.env.PORT || 3000
 
@@ -11,16 +12,16 @@ const app = express(),
 //
 // require('dotenv').config()
 //
-// app.use(express.json({strict: false}))
-// app.use(cors())
-// app.use('/images', express.static('public/images'))
-//
-// app.get('*', (req, res)=>{
-//     return res.status(404).json({
-//         error: 'End Point is Not Register NoT Found 404'
-//     })
-// })
-//
-// app.listen(port, ()=>{
-//     console.log(`Server is Running at PORT ${port}`)
-// })
+app.use(express.json({strict: false}))
+app.use(cors())
+app.use('/images', express.static('public/images'))
+
+app.get('*', (req, res)=>{
+    return res.status(404).json({
+        error: 'End Point is Not Register NoT Found 404'
+    })
+})
+
+app.listen(port, ()=>{
+    console.log(`Server is Running at PORT ${port}`)
+})
