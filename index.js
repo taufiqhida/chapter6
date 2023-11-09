@@ -1,20 +1,20 @@
-import express from 'express'
-import 'dotenv/config.js'
-import cors from 'cors'
-const app = express(),
-    port = process.env.PORT || 3000
+const express = require('express'),
+    app = express(),
+    port = process.env.PORT || 3000,
+    cors = require('cors'),
+    router = require('./routers'),
+    errorHandling = require('./middlewares/errorHanding')
 
-// const express = require('express'),
-//     app = express,
-//     port = process.env.PORT || 3000,
-//     cors = require('cors'),
-//     router= require('./router/index')
-//
-// require('dotenv').config()
-//
-app.use(express.json({strict: false}))
+require('dotenv').config()
+
+app.use(express.json({ strict : false}))
 app.use(cors())
 app.use('/images', express.static('public/images'))
+
+//Ini error Utama
+app.use('/api/v1', router);
+//Ini error handling
+app.use(errorHandling);
 
 app.get('*', (req, res)=>{
     return res.status(404).json({
